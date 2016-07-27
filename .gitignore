@@ -3,6 +3,7 @@ node_modules
 
 .env
 .env*
+.publish
 env*
 .DS_Store
 
