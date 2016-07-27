@@ -1,12 +1,11 @@
-@import 'bower_components/pcss/src/pcss'
-@import 'bower_components/pcss/src/pcss-extras'
+@import "bower_components/pcss/src/pcss"
+@import "bower_components/pcss/src/pcss-extras"
 
 body
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, sans-serif
 
 .masonry
   column-count: 2
-  column-gap: 0rem
 
   @media (min-width: 480px)
     column-count: 3
@@ -18,38 +17,38 @@ body
     column-count: 5
 
 .emoji
+  cursor: pointer
   display: inline-block
   height: 128px
-  width: 128px
   margin-bottom: $md
   position: relative
-  cursor: pointer
+  width: 128px
 
   &:hover
     .emoji-alias
       display: block
 
 .emoji-alias
-  position: absolute
   background-color: $brand
-  color: $white
   bottom: 0
-  left: 0
-  right: 0
-  z-index: 1
-  text-align: center
-  font-size: $sm
+  color: $white
   display: none
+  font-size: $sm
+  left: 0
+  position: absolute
+  right: 0
+  text-align: center
+  z-index: 1
 
 a
   color: $brand
 
-input[type=search]
+input[type="search"]
   border: 0
   color: $gray
   font-size: $md
-  padding-top: $sm
   padding-bottom: $sm
+  padding-top: $sm
   text-align: center
   width: 100%
 

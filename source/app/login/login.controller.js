@@ -1,8 +1,10 @@
+/* eslint new-cap:0 */
+
 (function() {
   angular
     .module('app')
     .controller('LoginController', LoginController)
-    .config (routeConfig);
+    .config(routeConfig);
 
   function routeConfig($stateProvider) {
     $stateProvider
@@ -19,12 +21,12 @@
       secret: ENV.CLIENT_SECRET
     }
 
-    if($stateParams.code) {
+    if ($stateParams.code) {
       storageService.set('code', $stateParams.code);
 
       if (storageService.get('code')) {
         slackService.oauth.access(config.client, config.secret, storageService.get('code'), (response) => {
-          if(response.ok) {
+          if (response.ok) {
             storageService.set('token', response.access_token);
             slackService.InitToken(response.access_token);
             $state.go('emoji');

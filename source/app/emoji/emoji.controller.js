@@ -1,7 +1,9 @@
+/* eslint new-cap:0 */
+
 (function() {
   angular
     .module('app')
-    .config (routeConfig)
+    .config(routeConfig)
     .controller('EmojiController', EmojiController);
 
   function routeConfig($stateProvider) {
@@ -33,7 +35,7 @@
       $timeout(function () { $scope.copied = false; }, 1000);
     };
 
-    slackService.ExecuteApiMethod("emoji.list", params, (response) => {
+    slackService.ExecuteApiMethod('emoji.list', params, (response) => {
       if (response.ok) {
         let res = response.emoji;
         let emoji = [];

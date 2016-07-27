@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /*!
  * ng-deg.slackapi JavaScript Library v1.0
  * https://github.com/nickaranz/slackapi-angularjs
