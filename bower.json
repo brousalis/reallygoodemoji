@@ -21,7 +21,9 @@
     "angular-local-storage": "^0.2.7",
     "angular-ui-router": "^0.3.1",
     "pcss": "brousalis/pcss#master",
-    "angular-sanitize": "^1.5.8"
+    "angular-sanitize": "^1.5.8",
+    "angular-filter": "^0.5.9",
+    "angular-clipboard": "^1.4.2"
   },
   "resolutions": {
     "angular": "1.5.7"

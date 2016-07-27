@@ -174,12 +174,9 @@
             executeApiCall('auth.test', params);
         }
 
-        //AUTH
         function authorizeApp(clientId, params) {
             var qs = '&' + toQueryString(params);
-            console.log(params, qs)
             var url = slackConfig.OAuthUrl + '?client_id=' + clientId + qs;
-            console.log(url)
             window.location.replace(url);
         }
         function initToken(token, callback) {

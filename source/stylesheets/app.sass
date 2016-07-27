@@ -6,7 +6,7 @@ body
 
 .masonry
   column-count: 2
-  column-gap: 1rem
+  column-gap: 0rem
 
   @media (min-width: 480px)
     column-count: 3
@@ -21,12 +21,37 @@ body
   display: inline-block
   height: 128px
   width: 128px
+  margin-bottom: $md
+  position: relative
+  cursor: pointer
+
+  &:hover
+    .emoji-alias
+      display: block
+
+.emoji-alias
+  position: absolute
+  background-color: $brand
+  color: $white
+  bottom: 0
+  left: 0
+  right: 0
+  z-index: 1
+  text-align: center
+  font-size: $sm
+  display: none
+
+a
+  color: $brand
 
 input[type=search]
-  background: $dark
   border: 0
   color: $gray
-  font-size: $lg
+  font-size: $md
   padding-top: $sm
   padding-bottom: $sm
   text-align: center
+  width: 100%
+
+  &::-webkit-input-placeholder
+    color: $gray

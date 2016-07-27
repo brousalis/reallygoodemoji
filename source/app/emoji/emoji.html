@@ -1,14 +1,27 @@
-<div ng-show="!loading" class="bg-light p ta-center">there are {{ count }} emoji</div>
-
-<div ng-show="!loading" class="bg-dark ta-center">
-  <input name="search" placeholder="fuzzy search" ng-model="search" type="search">
+<div class="ta-center" ng-show="loading">
+  <div style="background-image: url(/images/loading.svg); background-repeat: no-repeat; background-size: 100%; width: 200px; height: 200px" class="mx-auto o-10"></div>
 </div>
 
-<div class="mw-md mx-auto mt-md">
-  <div class="" ng-if="!loading">
-    <div class="emoji p-relative" ng-repeat="(k, v) in emoji">
-      <!-- <div class="d-block ta-center p">{{ k }}</div> -->
-      <img class="p-absolute center-xy" ng-src="{{ v }}" />
+<div ng-show="!loading" class="bg-light c-dark s-md p-fixed l0 t0 r0 ta-center z-500">
+  <div class="p-sm">
+    <span ng-show="!copied">you have {{ count }} <span class="c-brand">really good emoji</span></span>
+    <span ng-show="copied">copied <span class="c-brand">{{ copiedText }}</span> to clipboard 👍</span>
+  </div>
+
+  <div ng-show="!loading" class="bg-white b-bottom b--light ta-center">
+    <input search name="search" placeholder="🔍 type anywhere to search" ng-model="search" type="search">
+  </div>
+</div>
+
+<div class="mw-md mx-auto m-lg">
+  <div class="masonry" ng-if="!loading">
+    <div class="emoji" ng-repeat="e in emoji | fuzzyBy: 'alias': search" clipboard supported="supported" text="alias(e.alias)" on-copied="didCopy(e.alias)">
+      <div class="emoji-alias">{{ e.alias }}</div>
+      <img class="p-absolute center-xy" ng-src="{{ e.src }}" />
     </div>
   </div>
 </div>
+
+<footer class="d-table p col-1-1 ta-center">
+  <span class="color-gray-light d-table-cell va-middle">made by <a href="http://twitter.com/brousalis">pete</a> <span class="p-relative" style="top:1px">🐧</span></span>
+</footer>

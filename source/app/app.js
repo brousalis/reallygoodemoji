@@ -1,8 +1,12 @@
 angular.module('app', [
-  'ui.router',
   'ngSanitize',
+  'ui.router',
+  'angular-clipboard',
+  'angular.filter',
+
   'bendy.templates',
   'bendy.env',
+
   'app.slackService',
   'app.storageService'
 ]);

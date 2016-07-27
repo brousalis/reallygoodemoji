@@ -13,29 +13,47 @@
       })
   }
 
-  function EmojiController($scope, $q, slackService, storageService) {
+  function EmojiController($scope, $state, $timeout, $q, slackService, storageService) {
     $scope.loading = true;
+    $scope.copied = false;
+
+    if (!storageService.get('token')) {
+      $state.go('login');
+    }
 
     let params = {
       token: storageService.get('token')
     }
 
-    slackService.ExecuteApiMethod("emoji.list", params, (response) => {
-      $scope.loading = false
+    $scope.alias = (alias) => `:${alias}:`;
 
+    $scope.didCopy = (text) => {
+      $scope.copied = true;
+      $scope.copiedText = text;
+      $timeout(function () { $scope.copied = false; }, 1000);
+    };
+
+    slackService.ExecuteApiMethod("emoji.list", params, (response) => {
       if (response.ok) {
-        let emoji = response.emoji;
+        let res = response.emoji;
+        let emoji = [];
         let aliases = {};
-        for (let key of Object.keys(emoji)) {
-          if (/^alias/.test(emoji[key])) {
-            aliases[emoji[key].replace('alias:','')] = key
-            delete(emoji[key]);
+
+        for (let key of Object.keys(res)) {
+          if (/^alias/.test(res[key])) {
+            aliases[res[key].replace('alias:','')] = key
+            delete(res[key]);
+          } else {
+            emoji.push({alias: key, src: res[key]});
           }
         }
+
         $scope.aliases = aliases;
         $scope.emoji = emoji;
         $scope.count = Object.keys(emoji).length
+        $scope.loading = false
       } else {
+        $scope.loading = false
         $scope.error = true
       }
     });
