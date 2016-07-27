@@ -1,0 +1,14 @@
+<div ng-show="!loading" class="bg-light p ta-center">there are {{ count }} emoji</div>
+
+<div ng-show="!loading" class="bg-dark ta-center">
+  <input name="search" placeholder="fuzzy search" ng-model="search" type="search">
+</div>
+
+<div class="mw-md mx-auto mt-md">
+  <div class="" ng-if="!loading">
+    <div class="emoji p-relative" ng-repeat="(k, v) in emoji">
+      <!-- <div class="d-block ta-center p">{{ k }}</div> -->
+      <img class="p-absolute center-xy" ng-src="{{ v }}" />
+    </div>
+  </div>
+</div>

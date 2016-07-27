@@ -8,19 +8,33 @@
     $stateProvider
       .state('emoji', {
         url: '/emoji',
-        templateUrl: 'app/emoji.html',
+        templateUrl: 'app/emoji/emoji.html',
         controller: 'EmojiController'
       })
   }
 
-  function EmojiController($scope, slackSvc, storage) {
+  function EmojiController($scope, $q, slackService, storageService) {
+    $scope.loading = true;
+
     let params = {
-      token: storage.get('token')
+      token: storageService.get('token')
     }
 
-    slackSvc.ExecuteApiMethod("emoji.list", params, (response) => {
-      if (response) {
-        $scope.emoji = response.emoji
+    slackService.ExecuteApiMethod("emoji.list", params, (response) => {
+      $scope.loading = false
+
+      if (response.ok) {
+        let emoji = response.emoji;
+        let aliases = {};
+        for (let key of Object.keys(emoji)) {
+          if (/^alias/.test(emoji[key])) {
+            aliases[emoji[key].replace('alias:','')] = key
+            delete(emoji[key]);
+          }
+        }
+        $scope.aliases = aliases;
+        $scope.emoji = emoji;
+        $scope.count = Object.keys(emoji).length
       } else {
         $scope.error = true
       }

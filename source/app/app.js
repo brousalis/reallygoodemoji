@@ -1,7 +1,8 @@
 angular.module('app', [
   'ui.router',
+  'ngSanitize',
   'bendy.templates',
   'bendy.env',
-  'Deg.SlackApi',
-  'app.storage'
+  'app.slackService',
+  'app.storageService'
 ]);

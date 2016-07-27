@@ -1,9 +1,9 @@
 (function() {
   angular
-    .module('app.storage', [
+    .module('app.storageService', [
       'LocalStorageModule'
     ])
-    .provider('storage', storageService)
+    .provider('storageService', storageService)
 
   function storageService() {
     return ({

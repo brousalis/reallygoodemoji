@@ -18,10 +18,10 @@
   ],
   "dependencies": {
     "angular": "1.5.7",
+    "angular-local-storage": "^0.2.7",
     "angular-ui-router": "^0.3.1",
-    "pcss": "^1.0.0",
-    "slackapi-angularjs": "^0.1.0",
-    "angular-local-storage": "^0.2.7"
+    "pcss": "brousalis/pcss#master",
+    "angular-sanitize": "^1.5.8"
   },
   "resolutions": {
     "angular": "1.5.7"

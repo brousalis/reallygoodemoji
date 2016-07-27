@@ -8,16 +8,16 @@
     $stateProvider
       .state('login', {
         url: '/login',
-        templateUrl: 'app/login.html',
+        templateUrl: 'app/login/login.html',
         controller: 'LoginController'
       })
   }
 
-  function LoginController($state, storage, ENV) {
-    if (storage.get('code') && storage.get('token')) {
+  function LoginController($state, storageService, ENV) {
+    if (storageService.get('code') && storageService.get('token')) {
       $state.go('emoji');
     } else {
-      storage.remove('code');
+      storageService.remove('code');
       window.location('/');
     }
   }
