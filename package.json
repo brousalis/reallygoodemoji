@@ -1,0 +1,19 @@
+{
+  "name": "bendystraw-new",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=5.1.0"
+  },
+  "license" : "MIT",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/brousalis/bendystraw-new.git"
+  },
+  "scripts": {
+    "start": "gulp server --env development"
+  },
+  "devDependencies": {
+    "bendystraw": "^1.4.10"
+  }
+}
