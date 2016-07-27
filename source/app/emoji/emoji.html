@@ -13,9 +13,9 @@
   </div>
 </div>
 
-<div class="mw-md mx-auto m-lg">
-  <div class="masonry" ng-if="!loading">
-    <div class="emoji" ng-repeat="e in emoji | fuzzyBy: 'alias': search" clipboard supported="supported" text="alias(e.alias)" on-copied="didCopy(e.alias)">
+<div class="mw-md mx-auto m-lg ta-center">
+  <div class="cf" ng-if="!loading">
+    <div class="emoji" ng-repeat="e in emoji | orderBy: 'alias' | fuzzyBy: 'alias': search track by $index" clipboard supported="supported" text="alias(e.alias)" on-copied="didCopy(e.alias)">
       <div class="emoji-alias">{{ e.alias }}</div>
       <img class="p-absolute center-xy" ng-src="{{ e.src }}" />
     </div>
