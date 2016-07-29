@@ -3,6 +3,7 @@ angular.module('app', [
   'ui.router',
   'angular-clipboard',
   'angular.filter',
+  'infinite-scroll',
 
   'bendy.templates',
   'bendy.env',

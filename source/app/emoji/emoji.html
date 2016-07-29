@@ -1,27 +1,39 @@
-<div class="ta-center" ng-show="loading">
-  <div style="background-image: url(/images/loading.svg); background-repeat: no-repeat; background-size: 100%; width: 200px; height: 200px" class="mx-auto o-10"></div>
-</div>
-
-<div ng-show="!loading" class="bg-light c-dark s-md p-fixed l0 t0 r0 ta-center z-500">
-  <div class="p-sm">
-    <span ng-show="!copied">you have {{ count }} <span class="c-brand">really good emoji</span></span>
-    <span ng-show="copied">copied <span class="c-brand">{{ copiedText }}</span> to clipboard 👍</span>
+<div ng-show="!loading" class="bg-gray-lighter s-md ta-c z-500" style="box-shadow: 0 -1px 5px rgba(0,0,0,0.5)">
+  <div class="cf mw-md mx-a p-sm">
+    <div class="f-l">
+      <span ng-show="!copied">👍</span>
+      <span ng-show="!copied">you have {{ count.emoji }} <span class="c-brand">really good emoji</span></span>
+      <span ng-show="copied"><i class="i-clipboard"></i></span>
+      <span ng-show="copied">copied <span class="c-brand">{{ copiedText }}</span> to clipboard </span>
+    </div>
+    <div class="f-r settings">
+      <a class="c-pointer pl" ng-click="compact = true" ng-show="!compact"><i class="i-grid"></i></a>
+      <a class="c-pointer pl" ng-click="compact = false" ng-show="compact"><i class="i-list"></i></a>
+      <a class="c-pointer pl" ng-class="{'active': settings}" ng-click="settings = !settings"><i class="i-settings"></i></a>
+    </div>
   </div>
 
-  <div ng-show="!loading" class="bg-white b-bottom b--light ta-center">
-    <input search name="search" placeholder="🔍 type anywhere to search" ng-model="search" type="search">
-  </div>
-</div>
-
-<div class="mw-md mx-auto m-lg ta-center">
-  <div class="cf" ng-if="!loading">
-    <div class="emoji" ng-repeat="e in emoji | orderBy: 'alias' | fuzzyBy: 'alias': search track by $index" clipboard supported="supported" text="alias(e.alias)" on-copied="didCopy(e.alias)">
-      <div class="emoji-alias">{{ e.alias }}</div>
-      <img class="p-absolute center-xy" ng-src="{{ e.src }}" />
+  <div ng-show="settings">
+    <div class="p-sm">
+      <input ng-model="size" ng-change="saveSize()" type="range" min="24" max="128" />
+      <span>{{ size }}px</span>
     </div>
   </div>
 </div>
 
-<footer class="d-table p col-1-1 ta-center">
-  <span class="color-gray-light d-table-cell va-middle">made by <a href="http://twitter.com/brousalis">pete</a> <span class="p-relative" style="top:1px">🐧</span></span>
+<div class="">
+  <input name="search" placeholder="🔍  type anywhere to search" type="search" search ng-model="search">
+</div>
+
+<div class="mw-md mx-a m-lg ta-c">
+  <div class="cf" ng-if="!loading" infinite-scroll="loadMore()" infinite-scroll-distance="2">
+    <div class="emoji" ng-class="{'compact': compact}" style="width: {{ size }}px; height: {{ size }}px" ng-repeat="e in emoji | fuzzyBy: 'alias': search track by $index" clipboard supported="supported" text="alias(e.alias)" on-copied="didCopy(e.alias)">
+      <div class="emoji-alias" ng-show="size > 64">{{ e.alias }}</div>
+      <img class="p-a center-xy" alt="{{ e.alias }}" ng-src="{{ e.src }}" />
+    </div>
+  </div>
+</div>
+
+<footer class="d-t p col-12 ta-c">
+  <span class="color-gray-light d-tc va-m">made by <a href="http://twitter.com/brousalis">pete</a> <span class="p-r" style="top:1px">🐧</span></span>
 </footer>

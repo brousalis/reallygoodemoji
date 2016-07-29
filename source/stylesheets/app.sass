@@ -1,36 +1,6 @@
 @import "bower_components/pcss/src/pcss"
 @import "bower_components/pcss/src/pcss-extras"
 
-body
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, sans-serif
-
-.emoji
-  cursor: pointer
-  height: 128px
-  display: inline-block
-  margin-bottom: $md
-  position: relative
-  width: 128px
-
-  &:hover
-    .emoji-alias
-      display: block
-
-.emoji-alias
-  background-color: $brand
-  bottom: 0
-  color: $white
-  display: none
-  font-size: $sm
-  left: 0
-  position: absolute
-  right: 0
-  text-align: center
-  z-index: 1
-
-a
-  color: $brand
-
 input[type="search"]
   border: 0
   color: $gray
@@ -41,4 +11,124 @@ input[type="search"]
   width: 100%
 
   &::-webkit-input-placeholder
+    color: $gray-light
+
+.emoji
+  cursor: pointer
+  display: inline-block
+  margin: $md $xs
+  position: relative
+  background-color: #fff
+  transform: translateZ(0);
+  transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1)
+  background-clip: padding-box
+
+  &:not(.compact)
+    &:hover
+      .emoji-alias
+        display: block
+
+  &.compact
+    display: table
+    float: left
+    width: 50% !important
+    height: auto !important
+    padding: 0 $gutter
+    margin: 0
+    margin-bottom: $sm
+    text-align: left
+    vertical-align: middl0
+
+    img
+      width: 64px !important
+      height: 64px !important
+      left: auto
+      top: auto
+      transform: initial
+      float: right
+      position: relative
+
+
+  &::after
+    content: ""
+    position: absolute
+    z-index: -1
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3)
+    opacity: 0
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+
+  &:hover
+    transform: scale(1.20, 1.20)
+    z-index: 500
+
+  &:active
+    transform: scale(1.15, 1.15)
+
+  &:hover::after
+    opacity: 1
+
+.emoji-alias
+  background-color: $brand
+  bottom: 0
+  color: $white
+  display: none
+  font-size: $xs
+  left: 0
+  position: absolute
+  padding: 3px 0
+  right: 0
+  bottom: -1px
+  text-align: center
+  z-index: 1
+
+  .compact &
+    position: relative
+    text-align: left
+    float: none
+    margin-left: $gutter
+    background-color: transparent
     color: $gray
+    font-size: $md
+    font-family: monospace
+    display: table-cell
+    vertical-align: middle
+
+
+.settings
+  a
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+    opacity: 0.3
+
+    &.active,
+    &:hover
+      opacity: 0.8
+
+i
+  color: transparent
+  font: 0/0 a
+  text-shadow: none
+  background-repeat: no-repeat
+  display: inline-block
+  vertical-align: mid/dle
+  background-size: 24px 24px
+  width: 24px
+  height: 24px
+
+.i-grid
+  background-image: url("/images/grid.svg")
+
+.i-list
+  background-image: url("/images/list.svg")
+
+.i-settings
+  background-image: url("/images/settings.svg")
+
+.i-clipboard
+  background-image: url("/images/clip.svg")
+  background-size: cover
+  width: 30px
+  height: 30px
